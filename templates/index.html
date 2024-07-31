@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Falcon 9 Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SpaceX Falcon 9 Landing Prediction</h1>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="FlightNumber">Flight Number:</label>
+                <input type="text" id="FlightNumber" name="FlightNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="PayloadMass">Payload Mass (kg):</label>
+                <input type="number" id="PayloadMass" name="PayloadMass" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="Flights">Number of Flights:</label>
+                <input type="number" id="Flights" name="Flights" required>
+            </div>
+            <div class="form-group">
+                <label for="Block">Block:</label>
+                <input type="number" id="Block" name="Block" required>
+            </div>
+            <div class="form-group">
+                <label for="ReusedCount">Reused Count:</label>
+                <input type="number" id="ReusedCount" name="ReusedCount" required>
+            </div>
+            <div class="form-group">
+                <label for="Orbit">Orbit:</label>
+                <select id="Orbit" name="Orbit" required>
+                    <option value="Orbit_ES-L1">Orbit_ES-L1</option>
+                    <option value="Orbit_GEO">Orbit_GEO</option>
+                    <option value="Orbit_GTO">Orbit_GTO</option>
+                    <option value="Orbit_HEO">Orbit_HEO</option>
+                    <option value="Orbit_ISS">Orbit_ISS</option>
+                    <option value="Orbit_LEO">Orbit_LEO</option>
+                    <option value="Orbit_MEO">Orbit_MEO</option>
+                    <option value="Orbit_PO">Orbit_PO</option>
+                    <option value="Orbit_SO">Orbit_SO</option>
+                    <option value="Orbit_SSO">Orbit_SSO</option>
+                    <option value="Orbit_VLEO">Orbit_VLEO</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="LaunchSite">Launch Site:</label>
+                <select id="LaunchSite" name="LaunchSite" required>
+                    <option value="LaunchSite_CCAFS SLC 40">LaunchSite_CCAFS SLC 40</option>
+                    <option value="LaunchSite_KSC LC 39A">LaunchSite_KSC LC 39A</option>
+                    <option value="LaunchSite_VAFB SLC 4E">LaunchSite_VAFB SLC 4E</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="LandingPad">Landing Pad:</label>
+                <select id="LandingPad" name="LandingPad" required>
+                    <option value="LandingPad_5e9e3032383ecb267a34e7c7">LandingPad_5e9e3032383ecb267a34e7c7</option>
+                    <option value="LandingPad_5e9e3032383ecb554034e7c9">LandingPad_5e9e3032383ecb554034e7c9</option>
+                    <option value="LandingPad_5e9e3032383ecb6bb234e7ca">LandingPad_5e9e3032383ecb6bb234e7ca</option>
+                    <option value="LandingPad_5e9e3032383ecb761634e7cb">LandingPad_5e9e3032383ecb761634e7cb</option>
+                    <option value="LandingPad_5e9e3033383ecbb9e534e7cc">LandingPad_5e9e3033383ecbb9e534e7cc</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Serial">Serial:</label>
+                <select id="Serial" name="Serial" required>
+                    <option value="Serial_B0003">Serial_B0003</option>
+                    <option value="Serial_B0005">Serial_B0005</option>
+                    <option value="Serial_B0007">Serial_B0007</option>
+                    <option value="Serial_B1003">Serial_B1003</option>
+                    <!-- Add all other serial options here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="GridFins">Grid Fins:</label>
+                <select id="GridFins" name="GridFins" required>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Reused">Reused:</label>
+                <select id="Reused" name="Reused" required>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Legs">Legs:</label>
+                <select id="Legs" name="Legs" required>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
